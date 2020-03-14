@@ -14,11 +14,11 @@
                 </div>
             </div>
             <div class="mt-2">
-                <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="{{ route('posts.show', $post->slug) }}">{{ $post->name}}</a>
+                <a class="text-2xl text-gray-700 font-bold hover:text-gray-600" href="{{ localized_route('posts.show', $post->slug) }}">{{ $post->name}}</a>
                 <p class="mt-2 text-gray-600">{{ $post->description }} </p>
             </div>
             <div class="flex justify-between items-center mt-4">
-                <a class="text-blue-600 hover:underline" href="{{ route('posts.show', $post->slug) }}">Read more</a>
+                <a class="text-blue-600 hover:underline" href="{{ localized_route('posts.show', $post->slug) }}">Read more</a>
                 <div>
                     <a class="flex items-center" href="#">
                         <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://avatars2.githubusercontent.com/u/347400?s=460&v=4" alt="avatar">

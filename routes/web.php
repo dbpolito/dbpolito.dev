@@ -14,21 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('home'); })->name('home');
-// Route::get('/uses', function () { return view('home'); })->name('uses');
-// Route::get('/about', function () { return view('home'); })->name('about');
-Route::get('/contact', function () { return view('contact'); })->name('contact');
+$routes = function () {
+    Route::get('/', function () {
+        $posts = Post::latest()->get();
 
-Route::get('/posts', function () {
-    $posts = Post::latest()->get();
+        return view('posts')->with('posts', $posts);
+    })->name('posts');
 
-    return view('posts')->with('posts', $posts);
-})->name('posts');
+    Route::get('/posts/{slug}', function ($slug) {
+        $locale = app()->getLocale();
+        $post = Post::where("slug->{$locale}", $slug)->firstOrFail();
 
-Route::get('/posts/{slug}', function ($slug) {
-    $post = Post::where('slug->en', $slug)->firstOrFail();
+        request()->route()->setParameter('slug', $post);
 
-    return view('post')->with('post', $post);
-})->name('posts.show');
+        return view('post')
+        ->with('post', $post);
+    })->name('posts.show');
+
+    // Route::get('/uses', function () { return view('home'); })->name('uses');
+    Route::get('/about', function () { return view('about'); })->name('about');
+    Route::get('/contact', function () { return view('contact'); })->name('contact');
+};
+
+Route::name('en.')->middleware('localization')->group($routes);
+Route::name('br.')->middleware('localization')->prefix('br')->group($routes);
+
+
 
 
