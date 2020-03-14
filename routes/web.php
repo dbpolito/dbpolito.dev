@@ -26,7 +26,8 @@ $routes = function ($locale) {
     };
 };
 
-Route::name('br.')->middleware('localization')->prefix('br')->group($routes('br'));
+Route::redirect('nova', 'nova/login'); // workaround
+Route::name('pt_BR.')->middleware('localization')->prefix('br')->group($routes('pt_BR'));
 Route::name('en.')->middleware('localization')->group($routes('en'));
 
 

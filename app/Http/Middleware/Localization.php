@@ -21,12 +21,12 @@ class Localization
     public function handle($request, Closure $next)
     {
         if ($request->segment(1) === 'br') {
-            app()->setLocale('br');
+            app()->setLocale('pt_BR');
         }
 
         ViewFacade::composer('*', function (View $view) use ($request) {
             $locale = app()->getLocale();
-            $otherLocale = app()->getLocale() !== 'en' ? 'en' : 'br';
+            $otherLocale = app()->getLocale() !== 'en' ? 'en' : 'pt_BR';
             $routeName = Str::after(Route::currentRouteName(), '.');
 
             app()->setLocale($otherLocale);

@@ -64,9 +64,9 @@ class Post extends Resource
             Trix::make('translations_content_en')->withFiles('public')->hideWhenCreating()->hideWhenUpdating()->hideFromDetail(),
             Trix::make('translations_content_br')->withFiles('public')->hideWhenCreating()->hideWhenUpdating()->hideFromDetail(),
 
-            Tags::make('Tags')->rules('required'),
+            Tags::make('Tags'),
 
-            DateTime::make('Published At')->rules('required'),
+            DateTime::make('Published At'),
         ];
     }
 }

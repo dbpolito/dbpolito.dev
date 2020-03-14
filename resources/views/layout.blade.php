@@ -32,8 +32,8 @@
                             @endforeach
 
                             <a
-                                class="p-2 {{ $locale !== 'br' ? 'opacity-50 hover:opacity-100' : '' }}"
-                                @if ($locale !== 'br')
+                                class="p-2 {{ $locale !== 'pt_BR' ? 'opacity-50 hover:opacity-100' : '' }}"
+                                @if ($locale !== 'pt_BR')
                                     href="{{ $currentUrlForOtherLocale }}"
                                 @endif
                                 title="Português"
