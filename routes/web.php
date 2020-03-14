@@ -14,30 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$routes = function () {
-    Route::get('/', function () {
-        $posts = Post::latest()->get();
+$routes = function ($locale) {
+    return function () use ($locale) {
+        $menu = collect(config('menu.main'));
 
-        return view('posts')->with('posts', $posts);
-    })->name('posts');
-
-    Route::get('/posts/{slug}', function ($slug) {
-        $locale = app()->getLocale();
-        $post = Post::where("slug->{$locale}", $slug)->firstOrFail();
-
-        request()->route()->setParameter('slug', $post);
-
-        return view('post')
-        ->with('post', $post);
-    })->name('posts.show');
-
-    // Route::get('/uses', function () { return view('home'); })->name('uses');
-    Route::get('/about', function () { return view('about'); })->name('about');
-    Route::get('/contact', function () { return view('contact'); })->name('contact');
+        // Route::get($menu->first(fn ($item) => $item->route === 'uses')->slug->{$locale}, fn () => view('uses')->name('uses');
+        Route::get($menu->first(fn ($item) => $item->route === 'about')->slug->{$locale}, fn () => view('about'))->name('about');
+        Route::get($menu->first(fn ($item) => $item->route === 'contact')->slug->{$locale}, fn () => view('contact'))->name('contact');
+        Route::get('/', 'PostsController@index')->name('posts');
+        Route::get('/{slug}', 'PostsController@show')->name('posts.show');
+    };
 };
 
-Route::name('en.')->middleware('localization')->group($routes);
-Route::name('br.')->middleware('localization')->prefix('br')->group($routes);
+Route::name('br.')->middleware('localization')->prefix('br')->group($routes('br'));
+Route::name('en.')->middleware('localization')->group($routes('en'));
 
 
 

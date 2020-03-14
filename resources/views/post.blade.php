@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Home')
+@section('title', $post->name)
 
 @section('header')
 @endsection
@@ -8,7 +8,7 @@
 @section('content')
     <div class="px-10 py-6 bg-white rounded-lg shadow-md">
         <div class="flex justify-between items-center">
-            <span class="font-light text-gray-600">{{ $post->published_at }}</span>
+            <span class="font-light text-gray-600">{{ $post->published_at->diffForHumans() }}</span>
             <div>
                 @foreach ($post->tags as $tag)
                     <a class="ml-1 px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500" href="#">{{ $tag->name }}</a>

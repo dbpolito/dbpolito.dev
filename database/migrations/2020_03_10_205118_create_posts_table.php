@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->json('name');
             $table->json('description');
             $table->json('content');
-            $table->dateTime('published_at');
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }

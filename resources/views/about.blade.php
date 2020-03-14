@@ -1,10 +1,5 @@
 @extends('layout')
 
-@section('title', 'Home')
-
-@section('header')
-@endsection
-
 @section('content')
     <div class="py-10 bg-white rounded-lg shadow-md">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,7 +8,11 @@
                     Daniel Polito
                 </h3>
                 <p class="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
-                    CEO & Founder at Firework Web. Laravel Certificated. Creator of fwd and contributor of Laravel Zero.
+                    @if ($locale === 'en')
+                        CEO & Founder at Firework Web. Laravel Certified. Creator of fwd and contributor of Laravel Zero.
+                    @else
+                        CEO & Founder na Firework Web. Laravel Certificado. Criador do fwd e contribuidor do Laravel Zero.
+                    @endif
                 </p>
             </div>
         </div>

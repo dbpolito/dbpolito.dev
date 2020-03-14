@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title') | {{ config('app.name') }}</title>
+    <title>@yield('title', $activeMenuName) | {{ config('app.name') }}</title>
 
     <!-- Styles -->
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline">
                             @foreach ($menu as $item)
-                            <a href="{{ localized_route($item->route) }}" class="ml-2 px-3 py-2 rounded-md text-sm font-medium {{ Str::endsWith(Route::currentRouteName(), $item->route) ? 'text-white bg-gray-900' : 'text-gray-300 hover:text-white hover:bg-gray-700' }} focus:outline-none focus:text-white focus:bg-gray-700">{{ $item->name}}</a>
+                            <a href="{{ localized_route($item->route) }}" class="ml-2 px-3 py-2 rounded-md text-sm font-medium {{ $item->is_active ? 'text-white bg-gray-900' : 'text-gray-300 hover:text-white hover:bg-gray-700' }} focus:outline-none focus:text-white focus:bg-gray-700">{{ $item->name}}</a>
                             @endforeach
 
                             <a
@@ -105,7 +105,7 @@
         <header class="bg-white shadow">
             <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-bold leading-tight text-gray-900">
-                    @yield('title')
+                    @yield('title', $activeMenuName)
                 </h2>
             </div>
         </header>

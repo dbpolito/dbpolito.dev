@@ -39,18 +39,13 @@ class Localization
                 ->toArray();
             app()->setLocale($locale);
 
-            $menu = collect([
-                (object) ['route' => 'posts', 'name' => (object) ['en' => 'Posts', 'br' => 'Artigos']],
-                // (object) ['route' => 'uses', 'name' => (object) ['en' => 'Uses', 'br' => 'Usa']],
-                (object) ['route' => 'about', 'name' => (object) ['en' => 'About', 'br' => 'Sobre']],
-                (object) ['route' => 'contact', 'name' => (object) ['en' => 'Contact', 'br' => 'Contato']],
-            ])->map(function ($item) use ($locale) {
+            $menu = collect(config('menu.main'))->map(function ($item) use ($locale, $routeName) {
                 return (object) [
                     'route' => $item->route,
                     'name' => $item->name->{$locale},
+                    'is_active' => $item->route === $routeName,
                 ];
-            })  ;
-
+            });
 
             $view->with([
                 'menu' => $menu,
@@ -59,6 +54,7 @@ class Localization
                     "{$otherLocale}.{$routeName}",
                     $parameters
                 ),
+                'activeMenuName' => optional($menu->first(fn ($item) => $item->is_active))->name,
             ]);
         });
 
