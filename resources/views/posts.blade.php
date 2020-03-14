@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach ($posts as $post)
-        <div class="mb-5 px-10 py-6 bg-white rounded-lg shadow-md">
+        <div class="mb-5 px-10 py-8 bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center">
                 <span class="font-light text-gray-600">{{ $post->published_at->diffForHumans() }}</span>
                 <div>
